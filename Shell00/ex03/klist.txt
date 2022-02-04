@@ -1,2 +1,0 @@
-    Name              Cache name                                 Expires
-* knoh@42SEOUL.KR   API:12B04203-4EB8-44E4-BB45-53CF350BC205   Feb  1 05:11:28 2022
