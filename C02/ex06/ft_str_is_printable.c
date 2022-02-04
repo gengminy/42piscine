@@ -8,7 +8,7 @@ int ft_str_is_uppercase(char *str)
     idx = 0;
     while (str[idx] != '\0')
     {
-        if ('A' > str[idx] || str[idx] > 'Z')
+        if (str[idx] < 32 || str[idx] >= 127)
             return (0);
         idx++;
     }
