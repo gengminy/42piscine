@@ -67,17 +67,10 @@ int	ft_track_queen(char *q_row, int depth)
 int	ft_ten_queens_puzzle(void)
 {
 	char q_row[11];
-	int	cur;
 	int	count;
 
-	cur = 0;
 	count = 0;
-	while (cur <= 9)
-	{
-		q_row[0] = cur + '0';
-		count += ft_track_queen(q_row, 1);
-		cur++;
-	}
+	count += ft_track_queen(q_row, 0);
 	return (count);
 }
 
