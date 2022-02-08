@@ -11,8 +11,7 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-
-char g_queen_row[10];
+#include <stdio.h>
 
 int	ft_abs(int num)
 {
@@ -22,27 +21,67 @@ int	ft_abs(int num)
 		return num;
 }
 
-int	ft_is_valid(int col1, int row1, int col2, int row2)
+int	ft_is_queen_valid(char *q_row, int depth)
 {
-	if (col1 == col2 || row1 == row2)
-		return (0);
-	if (ft_abs(col2 - col1) == ft_abs(row2 - row1))
-		return (0);
+	int cmp_col;
+	int	cmp_row;
+	int row;
+
+	cmp_col = 0;
+	while (cmp_col < depth)
+	{
+		cmp_row = q_row[cmp_col] - '0';
+		row = q_row[depth] - '0';
+		if (cmp_col == depth || cmp_row == row)
+			return (0);
+		if (ft_abs(cmp_col - depth) == ft_abs(cmp_row - row))
+			return (0);
+		cmp_col++;
+	}
 	return (1);
 }
 
-void	ft_track_queen(char prev, int cur_depth, int depth)
+int	ft_track_queen(char *q_row, int depth)
 {
+	int	count;
+	int	cur;
 
+	count = 0;
+	cur = 0;
+	if (depth == 10)
+	{
+		write(1, q_row, 10);
+		write(1, "\n", 1);
+		return (1);
+	}
+	while (cur < 10)
+	{
+		q_row[depth] = cur + '0';		
+		if (ft_is_queen_valid(q_row, depth))
+			count += ft_track_queen(q_row, depth + 1);
+		cur++;
+	}
+	return (count);
 }
 
 int	ft_ten_queens_puzzle(void)
 {
-	char cur;
+	char q_row[11];
+	int	cur;
+	int	count;
 
-	cur = '0';
-	while (cur <= '9')
+	cur = 0;
+	count = 0;
+	while (cur <= 9)
 	{
-		g_queen_row[cur - '0'] = cur;
+		q_row[0] = cur + '0';
+		count += ft_track_queen(q_row, 1);
+		cur++;
 	}
+	return (count);
+}
+
+int main(void)
+{
+	printf("%d\n", ft_ten_queens_puzzle());
 }
