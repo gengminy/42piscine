@@ -11,50 +11,35 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdio.h>
 
-int ft_strlen(char *str)
+int	ft_is_charset(char ch, char *charset)
 {
-	int i;
-	
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	ft_compare_str(char *str, char *find)
-{
-	int i;
-
-	i = 0;		
-	while (str[i] && find[i])
+	while (*charset)
 	{
-		if(str[i] != find[i])
-			return (0);
-		i++;
+		if (ch == *charset)
+			return (1);
+		charset++;
 	}
-	return (1);
+	return (0);
 }
 
-
-int	ft_get_split_length(char *str, char *charset)
+int	ft_count_words(char *str, char *charset)
 {
-	int	i;
-	int	str_len;
-	int charset_len;
 	int	count;
 
 	count = 0;
-	i = 0;
-	str_len = ft_strlen(str);
-	charset_len = ft_strlen(charset);
 	while (*str)
 	{
-		if (ft_compare_str(str, charset))
+		if (!ft_is_charset(*str, charset))
+		{
 			count++;
+			while (!ft_is_charset(*str, charset))
+				str++;
+		}
 		str++;
 	}
-	return (str_len + 1 - count * charset_len + count + 1);
+	return (count);
 }
 
 void	ft_strncpy(char *dest, char *src, int n)
@@ -63,33 +48,31 @@ void	ft_strncpy(char *dest, char *src, int n)
 
 	i = -1;
 	while (*src && ++i < n)
-		*dest++ = *src++;
+		*(dest++) = *(src++);
 	*dest = '\0';
 }
 
 char	**ft_split(char *str, char *charset)
 {
-	char	**strs;
-	int		src_len;
+	char	**result;
 	int		i;
-	int		index;
-	char	*head;
+	char	*p;
 
 	i = 0;
-	index = 0;
-	src_len = ft_strlen(charset);
-	strs = (char **)malloc(ft_get_split_length(str, charset));
-	head = str;
+	result = (char **)malloc(sizeof(char *) * ft_count_words(str, charset) + 1);
 	while (*str)
 	{
-		if (ft_compare_str(str, charset))
+		if (!ft_is_charset(*str, charset))
 		{
-			strs[i] = (char *)malloc(str - head + 1);
-			ft_strncpy(strs[i], head, str - head);
-			*str = '\0';
-			str += src_len - 1;
+			p = str;
+			while (*str && !ft_is_charset(*str, charset))
+				str++;
+			result[i] = (char *)malloc(str - p + 1);
+			ft_strncpy(result[i], p, str - p);
+			i++;
 		}
 		str++;
 	}
-	return (strs);
+	result[i] = 0;
+	return (result);
 }
