@@ -1,23 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: knoh <knoh@student.42seoul.kr>             +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/07 19:04:28 by knoh              #+#    #+#             */
-/*   Updated: 2022/02/07 19:04:29 by knoh             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+//Stdheader
 
 #include <unistd.h>
+#include <stdio.h>
 
 int	ft_strlen(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while(str[i])
 		i++;
 	return (i);
 }
@@ -25,15 +16,22 @@ int	ft_strlen(char *str)
 int	ft_is_radix_valid(char *base)
 {
 	char	*cmp;
+	 int	radix;
 
+	radix = ft_strlen(base);
+	if (radix < 2)
+		return (0);
 	while (*base)
 	{
-		cmp = base;
 		if (*base == '+' || *base == '-')
 			return (0);
-		while (*(cmp++))
-			if (*cmp == *base)
+		cmp = base + 1;
+		while(*cmp)
+		{
+			if(*cmp == *base)
 				return (0);
+			cmp++;
+		}
 		base++;
 	}
 	return (1);
@@ -64,6 +62,38 @@ void	ft_putnbr_base(int nbr, char *base)
 	int	radix;
 
 	radix = ft_strlen(base);
-	if (radix > 1 && ft_is_radix_valid(base))
+	if (ft_is_radix_valid(base))
 		ft_print_numbers(nbr, base, radix);
+}
+
+int		main(void)
+{
+printf("----ex04----\n");
+		printf("101010\n");
+		ft_putnbr_base(42, "0a23l");
+		printf("\n");
+
+		printf("8867\n");
+		ft_putnbr_base(1132, "9876543210");
+		printf("\n");
+
+		printf("[SHOULD NOT PRINT]\n");
+		ft_putnbr_base(1132, "");
+		printf("\n");
+
+		printf("[SHOULD NOT PRINT]\n");
+		ft_putnbr_base(1132, "aabc!");
+		printf("\n");
+
+		printf("-bDBbFjci\n");
+		ft_putnbr_base(-2147483648, "abcdefghijABCDEFGHIJ"); // 20base
+		printf("\n");
+
+		printf("*///////\n");
+		ft_putnbr_base(2147483647, "!@#$%^&*()<>,.?/"); // 16base
+		printf("\n");
+
+		printf("-@@#!\n");
+		ft_putnbr_base(-42, "!@#"); // 3base
+		printf("\n");
 }
