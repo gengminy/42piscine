@@ -71,7 +71,8 @@ char	**ft_split(char *str, char *charset)
 			ft_strncpy(result[i], p, str - p);
 			i++;
 		}
-		str++;
+		else
+			str++;
 	}
 	result[i] = 0;
 	return (result);
