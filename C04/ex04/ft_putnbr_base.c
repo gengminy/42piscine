@@ -45,7 +45,8 @@ void	ft_print_numbers(int nbr, char *base, int radix)
 	{
 		write(1, "-", 1);
 		cur_num = -(nbr % radix);
-		ft_print_numbers(-(nbr / radix), base, radix);
+		if (nbr / radix != 0)
+			ft_print_numbers(-(nbr / radix), base, radix);
 	}
 	else if (nbr / radix == 0)
 		cur_num = nbr;
@@ -54,7 +55,7 @@ void	ft_print_numbers(int nbr, char *base, int radix)
 		cur_num = nbr % radix;
 		ft_print_numbers(nbr / radix, base, radix);
 	}
-	write(1, &base[cur_num], 1);
+	write(1, &base[cur_num], 1);	
 }
 
 void	ft_putnbr_base(int nbr, char *base)
@@ -66,11 +67,12 @@ void	ft_putnbr_base(int nbr, char *base)
 		ft_print_numbers(nbr, base, radix);
 }
 
+
 int		main(void)
 {
 printf("----ex04----\n");
-		printf("101010\n");
-		ft_putnbr_base(42, "0a23l");
+		printf("-1\n");
+		ft_putnbr_base(-1, "0123456789");
 		printf("\n");
 
 		printf("8867\n");
