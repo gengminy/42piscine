@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 
 void	ft_put_hex(long long number, int depth)
 {
@@ -52,8 +51,8 @@ void	ft_print_str_at(char *addr, int begin, int end)
 
 void	*ft_print_memory(void *addr, unsigned int size)
 {
-	 int	i;
-	char	*cur_addr;
+	unsigned int	i;
+	char			*cur_addr;
 
 	cur_addr = (char *)addr;
 	i = 0;
@@ -77,12 +76,4 @@ void	*ft_print_memory(void *addr, unsigned int size)
 	}
 	ft_print_str_at(cur_addr, size - size % 16, size);
 	return (addr);
-}
-
-int		main(void)
-{
-	char	*string;
-
-	string = "Bonjour les aminches\t\n\tc  est fou.tout.ce qu on peut faire avec...print_memory....lol.lol. 123124";
-	ft_print_memory(string, 1500);
 }

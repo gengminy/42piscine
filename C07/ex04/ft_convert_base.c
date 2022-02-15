@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 
 int	ft_atoi_base(char *nbr, char *base, int radix);
 
@@ -62,7 +61,7 @@ char	*ft_get_converted_number(int decimal, int radix, char *base_to)
 	 int	size;
 	 int	begin;
 	char	*buffer;
-	
+
 	size = ft_get_decimal_len_by_radix(decimal, radix);
 	buffer = (char *)malloc(size + 1);
 	if (!buffer)
@@ -77,7 +76,7 @@ char	*ft_get_converted_number(int decimal, int radix, char *base_to)
 	}
 	else
 		begin = 0;
-	while(begin < size)
+	while (begin < size)
 	{
 		buffer[--size] = base_to[decimal % radix];
 		decimal /= radix;
@@ -97,33 +96,4 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 		return (0);
 	decimal = ft_atoi_base(nbr, base_from, radix_from);
 	return (ft_get_converted_number(decimal, radix_to, base_to));
-}
-
-int main(void)
-{
-		printf("----ex04----\n");
-		char *str;
-		str = ft_convert_base("15858", "012345678", "0123456789ABCDEF");
-		printf("2A9B : %s\n", str);
-		free(str);
-		str = ft_convert_base("  \t \n -+-+-28909abc", "0123456789abcdef", "0123456789ABCDEFGHIJ");
-		printf("-ACDADBG : %s\n", str);
-		free(str);
-		str = ft_convert_base(" --zzixzoz", "ozix", "POIUYTREWQ");
-		printf("TWYO : %s\n", str);
-		free(str);
-		char base[6] = {-19, 66, -1, -8, -20, 0};
-		str = ft_convert_base("++858a112", "845a", base);
-		printf("B?? : %s\n", str);
-		free(str);
-
-		str = ft_convert_base("15858", "01234aa5678", "012345679ABCDEF");
-		printf("null : %s\n", str);
-		free(str);	
-		str = ft_convert_base("15858", "01278", "0");
-		printf("null : %s\n", str);
-		free(str);	
-		str = ft_convert_base("15858", "01-278", "019ABCDEF");
-		printf("null : %s\n", str);
-		free(str);
 }

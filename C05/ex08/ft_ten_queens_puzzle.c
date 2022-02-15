@@ -11,21 +11,20 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 
 int	ft_abs(int num)
 {
 	if (num < 0)
-		return -num;
+		return (-num);
 	else
-		return num;
+		return (num);
 }
 
 int	ft_is_queen_valid(char *q_row, int depth)
 {
-	int cmp_col;
+	int	cmp_col;
 	int	cmp_row;
-	int row;
+	int	row;
 
 	cmp_col = 0;
 	while (cmp_col < depth)
@@ -56,7 +55,7 @@ int	ft_track_queen(char *q_row, int depth)
 	}
 	while (cur < 10)
 	{
-		q_row[depth] = cur + '0';		
+		q_row[depth] = cur + '0';
 		if (ft_is_queen_valid(q_row, depth))
 			count += ft_track_queen(q_row, depth + 1);
 		cur++;
@@ -66,15 +65,10 @@ int	ft_track_queen(char *q_row, int depth)
 
 int	ft_ten_queens_puzzle(void)
 {
-	char q_row[11];
-	int	count;
+	char	q_row[11];
+	int		count;
 
 	count = 0;
 	count += ft_track_queen(q_row, 0);
 	return (count);
-}
-
-int main(void)
-{
-	printf("%d\n", ft_ten_queens_puzzle());
 }

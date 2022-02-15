@@ -1,14 +1,25 @@
-//42header
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: knoh <knoh@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/05 15:45:24 by knoh              #+#    #+#             */
+/*   Updated: 2022/02/05 15:45:25 by knoh             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-void ft_putstr(char *str)
+void	ft_putstr(char *str)
 {
-    int idx;
+	int	idx;
 
-    idx = 0;
-    while (str[idx] != '\0')
-    {
-        write(1, &str[idx], 1);
-        idx++;
-    }
+	idx = 0;
+	while (str[idx] != '\0')
+	{
+		write(1, &str[idx], 1);
+		idx++;
+	}
 }

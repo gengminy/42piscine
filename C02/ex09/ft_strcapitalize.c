@@ -10,28 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
 char	*ft_strcapitalize(char *str)
 {
 	int	idx;
 	int	isCapital;
 
-	idx = 0;
+	idx = -1;
 	isCapital = 1;
-	while (str[idx] != '\0')
+	while (str[++idx] != '\0')
 	{
-		if ('A' <= str[idx] && str[idx] <= 'Z')
-			str[idx] += 'a' - 'A';
+		if ('0' <= str[idx] && str[idx] <= '9')
+			isCapital = 0;
+		else if ('A' <= str[idx] && str[idx] <= 'Z')
+		{
+			if (!isCapital)
+				str[idx] += 'a' - 'A';
+			isCapital = 0;
+		}
 		else if ('a' <= str[idx] && str[idx] <= 'z')
 		{
-			if (isCapital != 0)
+			if (isCapital)
 				str[idx] -= 'a' - 'A';
 			isCapital = 0;
 		}
 		else
 			isCapital = 1;
-		idx++;
 	}
 	return (str);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                        :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knoh <knoh@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,20 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+int	ft_strlen(char *str)
+{
+	int	idx;
+
+	idx = 0;
+	while (str[idx] != '\0')
+		idx++;
+	return (idx);
+}
 
 char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
 	unsigned int	idx;
+	unsigned int	len;
 
 	idx = 0;
+	len = ft_strlen(src);
 	while (idx < n)
 	{
-		dest[idx] = src[idx];
+		if (idx < len)
+			dest[idx] = src[idx];
+		else
+			dest[idx] = '\0';
 		idx++;
 	}
-	if(src[idx] == '\0')
-		dest[idx] = '\0';
-	
 	return (dest);
 }

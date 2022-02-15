@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 
 int	ft_is_charset(char ch, char *charset)
 {
@@ -34,7 +33,7 @@ int	ft_count_words(char *str, char *charset)
 		if (!ft_is_charset(*str, charset))
 		{
 			count++;
-			while (!ft_is_charset(*str, charset))
+			while (*str && !ft_is_charset(*str, charset))
 				str++;
 		}
 		str++;
@@ -44,7 +43,7 @@ int	ft_count_words(char *str, char *charset)
 
 void	ft_strncpy(char *dest, char *src, int n)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (*src && ++i < n)

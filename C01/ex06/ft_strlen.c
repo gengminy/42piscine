@@ -1,12 +1,23 @@
-//42header
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: knoh <knoh@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/05 15:45:30 by knoh              #+#    #+#             */
+/*   Updated: 2022/02/05 15:45:31 by knoh             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-    int idx;
+	int	idx;
 
-    idx = 0;
-    while (str[idx] != '\0')
-        idx++;
-    return (idx);
+	idx = 0;
+	while (str[idx] != '\0')
+		idx++;
+	return (idx);
 }

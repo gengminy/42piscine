@@ -24,7 +24,7 @@ int	ft_isprime(int nb)
 		return (1);
 	if (num % 2 == 0 || num % 3 == 0)
 		return (0);
-	i = 6;
+	i = 2;
 	while (i * i <= num)
 	{
 		if (num % i == 0)
@@ -39,6 +39,8 @@ int	ft_find_next_prime(int nb)
 	unsigned int	i;
 
 	i = nb;
+	if (nb <= 2)
+		return (2);
 	while (!ft_isprime(i))
 		i++;
 	return (i);
