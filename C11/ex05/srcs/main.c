@@ -15,16 +15,23 @@
 
 int	ft_operate(int a, char op, int b)
 {
+	int	(*ops[5])(int, int);
+
+	ops[0] = &add;
+	ops[1] = &sub;
+	ops[2] = &mul;
+	ops[3] = &div;
+	ops[4] = &rem;
 	if (op == '+')
-		return (add(a, b));
+		return (ops[0](a, b));
 	if (op == '-')
-		return (sub(a, b));
+		return (ops[1](a, b));
 	if (op == '*')
-		return (mul(a, b));
+		return (ops[2](a, b));
 	if (op == '/')
-		return (div(a, b));
+		return (ops[3](a, b));
 	if (op == '%')
-		return (rem(a, b));
+		return (ops[4](a, b));
 	return (0);
 }
 

@@ -14,23 +14,15 @@ int	ft_is_sort(int *tab, int length, int(*f)(int, int))
 {
 	int	i;
 	int	j;
-	int	is_uprising;
 
 	i = 0;
 	j = 0;
-	is_uprising = 0;
-	if (length > 0 && tab[i] < tab[length - 1])
-		is_uprising = 1;
-	else if (length > 0 && tab[i] > tab[length - 1])
-		is_uprising = -1;
-	while (i < length - 1)
+	while (i < length)
 	{
-		j = i;
-		while (j < length - i - 1)
+		j = i + 1;
+		while (j < length)
 		{
-			if (f(tab[j], tab[j + 1]) > 0 && is_uprising > 0)
-				return (0);
-			else if (f(tab[j], tab[j + 1]) < 0 && is_uprising < 0)
+			if (f(tab[i], tab[j]) > 0)
 				return (0);
 			j++;
 		}

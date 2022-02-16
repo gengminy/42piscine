@@ -12,7 +12,7 @@
 
 int	ft_strcmp(char *s1, char *s2)
 {
-	int				 i;
+	int				i;
 	unsigned char	c1;
 	unsigned char	c2;
 
@@ -28,13 +28,36 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-void	ft_sort_string_tab(char **tab)
+int	ft_strlen(char *str)
 {
 	int	i;
-	int	j;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+void	ft_sort_string_tab(char **tab)
+{
+	 int	i;
+	 int	j;
+	char	*tmp;
 
 	i = 0;
 	while (tab[i])
 	{
+		j = 0;
+		while (tab[j] && tab[j + 1])
+		{
+			if (ft_strcmp(tab[j], tab[j + 1]) > 0)
+			{
+				tmp = tab[j];
+				tab[j] = tab[j + 1];
+				tab[j + 1] = tmp;
+			}
+			j++;
+		}
+		i++;
 	}
 }
