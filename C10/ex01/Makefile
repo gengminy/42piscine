@@ -12,7 +12,7 @@
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-TARGET = ft_display_file
+TARGET = ft_cat
 SRCS = main.c
 OBJECTS = $(SRCS:.c=.o)
 
