@@ -12,61 +12,93 @@
 
 #include "hexdump.h"
 
-int	hexdump(int fd, int flag, char *filename, char *program)
-{
-	 int	i;
-	 int	done;
-	char	prev[17];
-	char	buffer[17];
+int g_flag;
+int	g_bad_fd;
 
-	flag = 3;
-	i = 0;
-	done = 0;
-	errno = 0;	
-	while (read(fd, &buffer[i % 16], 1))
+void	hexdump_stdin(t_hexdump_file *hf)
+{
+	while (read(0, &hf->buffer[(hf->file_len) % 16], 1))
 	{
-		done = 1;
+		if (hf->file_len % 16 == 15)
+		{
+			print_hexdump(hf);
+			free(hf->buffer);
+			hf->buffer = malloc_with_null_init(17);
+			hf->offset += 16;
+		}
+		(hf->file_len)++;
+	}
+}
+
+void	hexdump(t_hexdump_file *hf, int fd)
+{
+	while (read(fd, &hf->buffer[(hf->file_len) % 16], 1))
+	{
+		g_bad_fd = 1;
 		if (errno)
 		{
-			print_error(filename, program);
+			print_error(hf->filename, hf->program);
 			break ;
 		}
-		if (i % 16 == 15)
+		if (hf->file_len % 16 == 15)
 		{
-			print(prev, buffer);			
-			ft_strncpy(prev, buffer, 16);
+			print_hexdump(hf);
+			free(hf->buffer);
+			hf->buffer = malloc_with_null_init(17);
+			hf->offset += 16;			
 		}
-		i++;
-		
+		(hf->file_len)++;
 	}
-	return (done);
+}
+
+void	hexdump_files(t_hexdump_file *hf, int argc, char *argv[])
+{
+	int	fd;
+	int	i;
+
+	i = g_flag;
+	while (++i < argc)
+	{
+		fd = open(argv[i], O_RDONLY);
+		if (fd == -1)
+			print_error(argv[i], argv[0]);
+		else
+		{
+			set_hf_filename(hf, argv[i], argv[0]);
+			hexdump(hf, fd);
+		}
+	}
+	if(!g_bad_fd)
+	{
+		errno = 9;
+		print_error(argv[argc - 1], argv[0]);
+	}
 }
 
 int	main(int argc, char *argv[])
 {
-	int	i;
-	int	fd;
-	int	has_flag;
+	t_hexdump_file	*hf;
 
-	has_flag = 0;
+	hf = alloc_hexdump_file();
 	if (argc > 1 && is_flag(argv[1]))
-		has_flag = 1;
-	if (argc == 1 + has_flag)
-		; //stdin
+		g_flag = 1;
+	if (argc == 1 + g_flag)
+		hexdump_stdin(hf);
 	else
+		hexdump_files(hf, argc, argv);
+	if (hf->is_printed)
 	{
-		i = has_flag;
-		while (++i < argc)
+		if ((hf->file_len) % 16 != 0)
 		{
-			fd = open(argv[i], O_RDONLY);
-			if (fd == -1)
-				print_error(argv[i], argv[0]);
-			if(!hexdump(fd, has_flag, argv[i], argv[0]))
-			{
-				errno = 9;
-				print_error(argv[argc - 1], argv[0]);	
-			}  //hexdump
+			print_hex_index(hf->offset, g_flag, 0); //인덱스 들어오도록
+			print_hex_string(hf->buffer, g_flag);
+			print_hex_string(hf->buffer + 8, g_flag);
+			print_string(hf->buffer, g_flag);
+			ft_putchar('\n');			
 		}
+		print_hex_index(hf->file_len, g_flag, 0);
+		ft_putchar('\n');
 	}
+	free_hf(hf);
 	return (0);
 }
