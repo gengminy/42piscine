@@ -22,9 +22,9 @@ void	print_error(char *filename, char *program)
 	ft_putstr("\n");
 }
 
-void	print_filename(char *filename, int i)
+void	print_filename(char *filename)
 {
-	if (i != 3)
+	if (g_multi_file)
 		ft_putstr("\n");
 	ft_putstr("==> ");
 	ft_putstr(filename);
