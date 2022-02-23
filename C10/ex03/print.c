@@ -15,26 +15,25 @@
 void	print_hexdump(t_hexdump_file *hf)
 {
 	hf->is_printed = 1;
-    if (is_str_equal(hf->prev, hf->buffer))
-    {
-        if (!(hf->duplicated))
-            ft_putstr("*\n");
-        hf->duplicated = 1;
-        return ;
-    }
-    hf->duplicated = 0;
-    print_hex_index(hf->offset, g_flag, 0); //인덱스 들어오도록
-    print_hex_string(hf->buffer, g_flag);
-    print_hex_string(hf->buffer + 8, g_flag);
-    print_string(hf->buffer, g_flag);
-    ft_strncpy(hf->prev, hf->buffer, 16);
-    ft_putchar('\n');
+	if (is_str_equal(hf->prev, hf->buffer))
+	{
+		if (!(hf->duplicated))
+			ft_putstr("*\n");
+		hf->duplicated = 1;
+		return ;
+	}
+	hf->duplicated = 0;
+	print_hex_index(hf->offset, g_flag, 0);
+	print_hex_string(hf->buffer, g_flag);
+	print_hex_string(hf->buffer + 8, g_flag);
+	print_string(hf->buffer, g_flag);
+	ft_putchar('\n');
 }
 
 void	print_hex_index(int index, int flag, int depth)
 {
 	if (depth == 7 + flag)
-	   return ;
+		return ;
 	print_hex_index(index / 16, flag, depth + 1);
 	ft_putchar("0123456789abcdef"[index % 16]);
 }
@@ -59,7 +58,7 @@ void	print_hex_string(char *str, int flag)
 
 void	print_string(char *str, int flag)
 {
-	int i;
+	int	i;
 
 	if (!flag)
 		return ;
@@ -84,5 +83,5 @@ void	print_error(char *filename, char *program)
 	ft_putstr(": ");
 	ft_putstr(strerror(errno));
 	ft_putstr("\n");
-    errno = 0;
+	errno = 0;
 }

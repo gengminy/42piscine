@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tail.h                                             :+:      :+:    :+:   */
+/*   ft_sorted_list_insert.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knoh <knoh@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 13:38:27 by knoh              #+#    #+#             */
-/*   Updated: 2022/02/20 13:38:28 by knoh             ###   ########.fr       */
+/*   Created: 2022/02/23 21:18:52 by knoh              #+#    #+#             */
+/*   Updated: 2022/02/23 21:18:53 by knoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TAIL_H
-# define TAIL_H
+#include "ft_list.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <fcntl.h>
-# include <errno.h>
-# include <libgen.h>
+void	ft_sorted_list_insert(t_list **begin_list, void *data, int (*cmp)())
+{
+	t_list	*new_node;
+	t_list	*prev;
+	t_list	*cur;
 
-void	print_error(char *filename, char *program);
-void	print_filename(char *filename);
-void	ft_putstr(char *str);
-int		ft_atoi(char *str);
-
-extern int	g_multi_file;
-
-#endif
+	new_node = ft_create_elem(data);
+	prev = 0;
+	cur = *begin_list;
+	while (cur)
+	{
+		if ((*cmp)(cur->data, new_node->data) > 0)
+		{
+			if (prev)
+				prev->next = new_node;
+			new_node->next = cur;
+			return ;
+		}
+		prev = cur;
+		cur = cur->next;
+	}
+}

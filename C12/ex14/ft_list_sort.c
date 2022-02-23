@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tail.h                                             :+:      :+:    :+:   */
+/*   ft_list_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knoh <knoh@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 13:38:27 by knoh              #+#    #+#             */
-/*   Updated: 2022/02/20 13:38:28 by knoh             ###   ########.fr       */
+/*   Created: 2022/02/23 20:50:47 by knoh              #+#    #+#             */
+/*   Updated: 2022/02/23 20:50:48 by knoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TAIL_H
-# define TAIL_H
+#include "ft_list.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <fcntl.h>
-# include <errno.h>
-# include <libgen.h>
+void	ft_list_sort(t_list **begin_list, int (*cmp)())
+{
+	t_list	*begin;
+	t_list	*cur;
+	void	*swap;
 
-void	print_error(char *filename, char *program);
-void	print_filename(char *filename);
-void	ft_putstr(char *str);
-int		ft_atoi(char *str);
-
-extern int	g_multi_file;
-
-#endif
+	begin = *begin_list;
+	cur = *begin_list;
+	while (cur && cur->next)
+	{
+		if (cmp(cur->data, cur->next->data) > 0)
+		{
+			swap = cur->data;
+			cur->data = cur->next->data;
+			cur->next->data = swap;
+			cur = *begin_list;
+			continue ;
+		}
+		cur = cur->next;
+	}
+}

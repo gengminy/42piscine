@@ -20,7 +20,7 @@ void	tail(int fd, int length)
 	 int	i;
 	 int	pivot;
 
-	i = 0;
+	i = -1;
 	buffer = (char *)malloc(length);
 	if (length == 0)
 	{
@@ -30,12 +30,9 @@ void	tail(int fd, int length)
 	}
 	else
 	{
-		while (read(fd, &buffer[(i % length)], 1))
-		{
+		while (read(fd, &buffer[(++i % length)], 1))
 			if (errno)
 				return ;
-			i++;
-		}
 		pivot = i % length;
 		if (i >= length)
 			write(1, buffer + pivot, length - pivot);
@@ -63,7 +60,7 @@ int	main(int argc, char *argv[])
 			else
 			{
 				if (argc > 4)
-					print_filename(argv[i], i);
+					print_filename(argv[i]);
 				tail(fd, ft_atoi(argv[2]));
 				close(fd);
 			}

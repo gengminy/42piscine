@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hexfile.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: knoh <knoh@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/23 15:33:30 by knoh              #+#    #+#             */
+/*   Updated: 2022/02/23 15:33:31 by knoh             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "hexdump.h"
 
 t_hexdump_file	*alloc_hexdump_file(void)
@@ -5,7 +17,7 @@ t_hexdump_file	*alloc_hexdump_file(void)
 	t_hexdump_file	*hf;
 
 	hf = (t_hexdump_file *)malloc(sizeof(t_hexdump_file));
-	hf->prev = (char *)malloc(17);
+	hf->prev = malloc_with_null_init(17);
 	hf->buffer = malloc_with_null_init(17);
 	hf->duplicated = 0;
 	hf->file_len = 0;

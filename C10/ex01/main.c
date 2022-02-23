@@ -16,43 +16,35 @@
 #include <errno.h>
 #include <libgen.h>
 
-#define BUFFER_SIZE 1
-
-char	*g_program;
-
 void	ft_putstr(char *str)
 {
 	while (*str)
 		write(1, str++, 1);
 }
 
-void	print_err_msg(char *file)
+void	print_error(char *filename, char *program)
 {
-	ft_putstr(basename(g_program));
+	ft_putstr(basename(program));
 	ft_putstr(": ");
-	ft_putstr(file);
+	ft_putstr(filename);
 	ft_putstr(": ");
 	ft_putstr(strerror(errno));
 	ft_putstr("\n");
 	errno = 0;
 }
 
-void	display_file(int fd, char *file)
+void	display_file(int fd, char *filename, char *program)
 {
-	int				size;
-	unsigned char	buffer[BUFFER_SIZE];
+	unsigned char	buffer;
 
-	while (1)
+	while (read(fd, &buffer, 1))
 	{
-		size = read(fd, buffer, BUFFER_SIZE);
 		if (errno)
 		{
-			print_err_msg(file);
+			print_error(filename, program);
 			return ;
 		}
-		if (size == 0)
-			return ;
-		write(1, buffer, size);
+		write(1, &buffer, 1);
 	}
 }
 
@@ -61,9 +53,8 @@ int	main(int argc, char *argv[])
 	int	fd;
 	int	i;
 
-	g_program = argv[0];
 	if (argc == 1)
-		display_file(0, 0);
+		display_file(0, 0, argv[0]);
 	else
 	{
 		i = 0;
@@ -71,10 +62,10 @@ int	main(int argc, char *argv[])
 		{
 			fd = open(argv[i], O_RDONLY);
 			if (fd == -1)
-				print_err_msg(argv[i]);
+				print_error(argv[i], argv[0]);
 			else
 			{
-				display_file(fd, argv[i]);
+				display_file(fd, argv[i], argv[0]);
 				close(fd);
 			}
 		}

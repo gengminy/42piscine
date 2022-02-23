@@ -12,22 +12,22 @@
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-TARGET = ft_cat
+NAME = ft_cat
 SRCS = main.c
 OBJECTS = $(SRCS:.c=.o)
 
-all: $(TARGET)
+all: $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
 	
-$(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS)
+$(NAME): $(OBJECTS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS)
 
 clean:
 	rm -f $(OBJECTS)
 
 fclean: clean
-	rm -f $(TARGET)
+	rm -f $(NAME)
 
 re: fclean all

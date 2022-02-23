@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tail.h                                             :+:      :+:    :+:   */
+/*   ft_list.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knoh <knoh@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 13:38:27 by knoh              #+#    #+#             */
-/*   Updated: 2022/02/20 13:38:28 by knoh             ###   ########.fr       */
+/*   Created: 2022/02/23 17:05:58 by knoh              #+#    #+#             */
+/*   Updated: 2022/02/23 17:05:59 by knoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TAIL_H
-# define TAIL_H
+#ifndef FT_LIST_H
+# define FT_LIST_H
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <fcntl.h>
-# include <errno.h>
-# include <libgen.h>
+t_list	*ft_create_elem(void *data)
+{
+	t_list	*node;
 
-void	print_error(char *filename, char *program);
-void	print_filename(char *filename);
-void	ft_putstr(char *str);
-int		ft_atoi(char *str);
+	node = (t_list *)malloc(sizeof(t_list));
+	node->data = data;
+	node->next = 0;
+	return (node);
+}
 
-extern int	g_multi_file;
+typedef struct s_list
+{
+	struct s_list	*next;
+	void			*data;
+}	t_list;
 
 #endif

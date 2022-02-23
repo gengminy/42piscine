@@ -14,7 +14,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = ft_hexdump
 SRCS = main.c print.c string.c hexfile.c validate.c
-OBJECTS = ./print.o ./string.o ./validate.o ./main.o ./hexfile.o
+OBJECTS = $(SRCS:.c=.o)
 INCLUDE = hexdump.h
 
 all: $(NAME)

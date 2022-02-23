@@ -12,16 +12,23 @@
 
 #include "hexdump.h"
 
-int g_flag;
+int	g_flag;
 int	g_bad_fd;
 
 void	hexdump_stdin(t_hexdump_file *hf)
 {
-	while (read(0, &hf->buffer[(hf->file_len) % 16], 1))
+	while (read(0, &(hf->buffer[(hf->file_len) % 16]), 1))
 	{
+		g_bad_fd = 1;
+		if (errno)
+		{
+			print_error(hf->filename, hf->program);
+			break ;
+		}		
 		if (hf->file_len % 16 == 15)
 		{
 			print_hexdump(hf);
+			ft_strncpy(hf->prev, hf->buffer, 16);
 			free(hf->buffer);
 			hf->buffer = malloc_with_null_init(17);
 			hf->offset += 16;
@@ -32,7 +39,7 @@ void	hexdump_stdin(t_hexdump_file *hf)
 
 void	hexdump(t_hexdump_file *hf, int fd)
 {
-	while (read(fd, &hf->buffer[(hf->file_len) % 16], 1))
+	while (read(fd, &(hf->buffer[(hf->file_len) % 16]), 1))
 	{
 		g_bad_fd = 1;
 		if (errno)
@@ -43,9 +50,10 @@ void	hexdump(t_hexdump_file *hf, int fd)
 		if (hf->file_len % 16 == 15)
 		{
 			print_hexdump(hf);
+			ft_strncpy(hf->prev, hf->buffer, 16);
 			free(hf->buffer);
 			hf->buffer = malloc_with_null_init(17);
-			hf->offset += 16;			
+			hf->offset += 16;
 		}
 		(hf->file_len)++;
 	}
@@ -68,7 +76,7 @@ void	hexdump_files(t_hexdump_file *hf, int argc, char *argv[])
 			hexdump(hf, fd);
 		}
 	}
-	if(!g_bad_fd)
+	if (!g_bad_fd)
 	{
 		errno = 9;
 		print_error(argv[argc - 1], argv[0]);
@@ -90,11 +98,11 @@ int	main(int argc, char *argv[])
 	{
 		if ((hf->file_len) % 16 != 0)
 		{
-			print_hex_index(hf->offset, g_flag, 0); //인덱스 들어오도록
+			print_hex_index(hf->offset, g_flag, 0);
 			print_hex_string(hf->buffer, g_flag);
 			print_hex_string(hf->buffer + 8, g_flag);
 			print_string(hf->buffer, g_flag);
-			ft_putchar('\n');			
+			ft_putchar('\n');
 		}
 		print_hex_index(hf->file_len, g_flag, 0);
 		ft_putchar('\n');

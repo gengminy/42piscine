@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tail.h                                             :+:      :+:    :+:   */
+/*   ft_list_reverse.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knoh <knoh@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 13:38:27 by knoh              #+#    #+#             */
-/*   Updated: 2022/02/20 13:38:28 by knoh             ###   ########.fr       */
+/*   Created: 2022/02/23 19:24:08 by knoh              #+#    #+#             */
+/*   Updated: 2022/02/23 19:24:08 by knoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TAIL_H
-# define TAIL_H
+#include "ft_list.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <fcntl.h>
-# include <errno.h>
-# include <libgen.h>
+void	ft_list_reverse(t_list **begin_list)
+{
+	t_list	*prev;
+	t_list	*cur;
+	t_list	*next;
 
-void	print_error(char *filename, char *program);
-void	print_filename(char *filename);
-void	ft_putstr(char *str);
-int		ft_atoi(char *str);
-
-extern int	g_multi_file;
-
-#endif
+	prev = 0;
+	cur = *begin_list;
+	while (cur)
+	{
+		next = cur->next;
+		cur->next = prev;
+		prev = cur;
+		cur = next;
+	}
+}

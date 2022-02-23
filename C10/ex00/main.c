@@ -36,19 +36,19 @@ int	ft_is_arg_valid(int argc)
 
 int	main(int argc, char *argv[])
 {
-	 int	file;
-	char	buffer[1024];
+	 int	fd;
+	char	buffer;
 
 	if (ft_is_arg_valid(argc))
 	{
-		file = open(argv[1], O_RDONLY);
-		if(file < 0)
+		fd = open(argv[1], O_RDONLY);
+		if (fd == -1)
 			ft_putstr("Cannot read file.\n");
 		else
 		{
-			if (read(file, buffer, 1024) >= 0)
-				ft_putstr(buffer);
+			while (read(fd, &buffer, 1))
+				write(1, &buffer, 1);
 		}
-		close(file);
+		close(fd);
 	}
 }

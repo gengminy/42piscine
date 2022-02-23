@@ -29,7 +29,7 @@ typedef struct s_hexdump_file {
 	 int	file_len;
 	 int	is_printed;
 	 int	offset;
-}   t_hexdump_file;
+}	t_hexdump_file;
 
 void			print_hexdump(t_hexdump_file *hf);
 void			print_hex_index(int index, int flag, int depth);
@@ -45,12 +45,12 @@ char			*malloc_with_null_init(int size);
 
 int				is_char_printable(unsigned char c);
 int				is_flag(char *str);
-int			    is_str_equal(char *c1, char *c2);
+int				is_str_equal(char *c1, char *c2);
 
 t_hexdump_file	*alloc_hexdump_file(void);
-void			set_hf_filename(t_hexdump_file *hf, char *filename, char *program);
+void			set_hf_filename(t_hexdump_file *hf, char *file, char *program);
 void			free_hf(t_hexdump_file *hf);
 
-extern int  g_flag;
+extern int	g_flag;
 
 #endif

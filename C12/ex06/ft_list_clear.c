@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tail.h                                             :+:      :+:    :+:   */
+/*   ft_list_clear.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: knoh <knoh@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 13:38:27 by knoh              #+#    #+#             */
-/*   Updated: 2022/02/20 13:38:28 by knoh             ###   ########.fr       */
+/*   Created: 2022/02/23 19:16:25 by knoh              #+#    #+#             */
+/*   Updated: 2022/02/23 19:16:26 by knoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TAIL_H
-# define TAIL_H
+#include "ft_list.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <fcntl.h>
-# include <errno.h>
-# include <libgen.h>
+void	ft_list_clear(t_list *begin_list, void (*free_fct)(void *))
+{
+	t_list	*cur;
 
-void	print_error(char *filename, char *program);
-void	print_filename(char *filename);
-void	ft_putstr(char *str);
-int		ft_atoi(char *str);
-
-extern int	g_multi_file;
-
-#endif
+	while (begin_list)
+	{
+		cur = begin_list;
+		free_fct(cur->data);
+		free(cur);
+		begin_list = begin_list->next;
+	}
+}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   string.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: knoh <knoh@student.42seoul.kr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/23 15:33:10 by knoh              #+#    #+#             */
+/*   Updated: 2022/02/23 15:33:11 by knoh             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "hexdump.h"
 
 void	ft_putchar(unsigned char c)
@@ -33,7 +45,7 @@ void	ft_strncpy(char *dst, char *src, int size)
 	int	i;
 
 	i = 0;
-	while (src[i] && i < size)
+	while (i < size)
 	{
 		dst[i] = src[i];
 		i++;
@@ -41,19 +53,19 @@ void	ft_strncpy(char *dst, char *src, int size)
 	dst[i] = '\0';
 }
 
-char    *malloc_with_null_init(int size)
+char	*malloc_with_null_init(int size)
 {
-     int    i;
-    char    *result;
+	 int	i;
+	char	*result;
 
-    result = (char *)malloc(size);
-    if (!result)
-        return (0);
-    i = 0;
-    while (i < size)
-    {
-        result[i] = '\0';
-        i++;
-    }
-    return (result);
+	result = (char *)malloc(size);
+	if (!result)
+		return (0);
+	i = 0;
+	while (i < size)
+	{
+		result[i] = '\0';
+		i++;
+	}
+	return (result);
 }
