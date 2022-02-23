@@ -40,6 +40,7 @@ void	tail(int fd, int length)
 		if (i >= length)
 			write(1, buffer + pivot, length - pivot);
 		write(1, buffer, pivot);
+		g_multi_file = 1;
 	}
 }
 
