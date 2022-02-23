@@ -12,6 +12,8 @@
 
 #include "tail.h"
 
+int	g_multi_file;
+
 void	tail(int fd, int length)
 {
 	char	*buffer;
