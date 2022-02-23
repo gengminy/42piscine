@@ -25,4 +25,6 @@ void	print_filename(char *filename, int i);
 void	ft_putstr(char *str);
 int		ft_atoi(char *str);
 
+extern g_multi_file;
+
 #endif
