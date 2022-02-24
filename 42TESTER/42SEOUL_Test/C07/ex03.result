@@ -1,0 +1,53 @@
+ - Elements -
+['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'k']
+ - Separator: ', ' -
+ - Result -
+a, b, c, d, e, f, g, h, i, k
+[len=28]
+
+ - Elements -
+[]
+ - Separator: ', ' -
+ - Result -
+
+[len=0]
+
+ - Elements -
+[]
+ - Separator: ', ' -
+ - Result -
+
+[len=0]
+
+ - Elements -
+['adasdsa', '', '', 'zxcva', '12134', '', '@@', '!', '??']
+ - Separator: ' -@- ' -
+ - Result -
+adasdsa -@-  -@-  -@- zxcva -@- 12134 -@-  -@- @@ -@- ! -@- ??
+[len=62]
+
+ - Elements -
+['Doom2 - Hell on earth']
+ - Separator: ' ^^ ' -
+ - Result -
+Doom2 - Hell on earth
+[len=21]
+
+ - Elements -
+['Diff', 'OK', ':D', '
+', 'Grade:', '100']
+ - Separator: ' ' -
+ - Result -
+Diff OK :D 
+ Grade: 100
+[len=23]
+
+ - Elements -
+['Diff', 'KO', '', '
+', 'Grade:', '0']
+ - Separator: ':( ' -
+ - Result -
+Diff:( KO:( :( 
+:( Grade::( 0
+[len=29]
+

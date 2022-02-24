@@ -1,0 +1,9 @@
+ft_ultimate_range(&p, 0, 0): 0, 0x0
+ft_ultimate_range(&p, 1, 0): 0, 0x0
+ft_ultimate_range(&p, 2, 0): 0, 0x0
+ft_ultimate_range(&p, 0, 3): 3, 1
+ft_ultimate_range(&p, 2, 5122): 5120, 1
+ft_ultimate_range(&p, -5, 5): [len 10] -5 -4 -3 -2 -1 0 1 2 3 4 _
+ft_ultimate_range(&p, -10, 10): [len 20] -10 -9 -8 -7 -6 -5 -4 -3 -2 -1 0 1 2 3 4 5 6 7 8 9 _
+ft_ultimate_range(&p, 34, 45): [len 11] 34 35 36 37 38 39 40 41 42 43 44 _
+ft_ultimate_range(&p, 0, 10): [len 10] 0 1 2 3 4 5 6 7 8 9 _
