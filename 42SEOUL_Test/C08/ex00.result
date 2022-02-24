@@ -1,5 +1,0 @@
-ft_putchar(c) -> a
-ft_putstr(str) -> gogo
-ft_strcmp(s1, s2) -> goto, heaven, -1
-ft_strlen(str) -> 5
-ft_swap(a, b) -> 0x0, 0x0
